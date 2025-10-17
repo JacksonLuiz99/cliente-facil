@@ -12,7 +12,9 @@ export class ClienteService {
     
    }
    salvar(Cliente: Cliente) {
-      console.log("Cliente salvo com sucesso:", Cliente);
+    const storage = this.obterStorage();
+    storage.push(Cliente);
+    localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(storage));
     }
 
     obterStorage(): Cliente[] {
