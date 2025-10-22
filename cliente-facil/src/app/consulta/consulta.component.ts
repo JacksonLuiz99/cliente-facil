@@ -6,6 +6,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { ClienteService } from '../cliente.service';
+import { Cliente } from '../cadastro/cliente';
 
 @Component({
   selector: 'app-consulta',
@@ -21,4 +23,12 @@ import { MatTableModule } from '@angular/material/table';
   templateUrl: './consulta.component.html',
   styleUrl: './consulta.component.scss',
 })
-export class ConsultaComponent {}
+export class ConsultaComponent {
+  listaClientes: Cliente[] = [];
+
+  constructor(private service: ClienteService) {}
+
+  ngOnInit() {
+    this.listaClientes = this.service.pesquisarClientes('');
+  }
+}
