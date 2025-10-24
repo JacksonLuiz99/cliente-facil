@@ -26,6 +26,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './consulta.component.scss',
 })
 export class ConsultaComponent {
+  nomeBusca: string = '';
   listaClientes: Cliente[] = [];
   colunasTable: string[] = ['id', 'nome', 'cpf', 'dataNascimento', 'email'];
 
@@ -33,5 +34,9 @@ export class ConsultaComponent {
 
   ngOnInit() {
     this.listaClientes = this.service.pesquisarClientes('');
+  }
+
+  pesquisar() {
+   this.listaClientes = this.service.pesquisarClientes(this.nomeBusca);
   }
 }
