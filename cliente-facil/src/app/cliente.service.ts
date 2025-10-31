@@ -25,8 +25,14 @@ export class ClienteService {
     );*/
 
     return clientes.filter(
-      (c) => c.nome?.toLowerCase().includes(nomeBusca.toLowerCase()),
+      (cliente) =>
+        cliente.nome?.toLowerCase().includes(nomeBusca.toLowerCase()),
     );
+  }
+
+  buscarClientePorId(id: string): Cliente | undefined {
+    const clientes = this.obterStorage();
+    return clientes.find(cliente => cliente.id === id);
   }
 
   private obterStorage(): Cliente[] {
