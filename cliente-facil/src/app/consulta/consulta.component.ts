@@ -49,6 +49,6 @@ export class ConsultaComponent {
   }
 
   preparaEditar(id: string) {
-    this.router.navigate(['/cadastro'], { queryParams: { 'id-cliente': id } });
+    this.router.navigate(['/cadastro'], { queryParams: { 'id': id } });
   }
 }
