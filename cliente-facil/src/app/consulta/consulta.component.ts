@@ -10,6 +10,8 @@ import { ClienteService } from '../cliente.service';
 import { Cliente } from '../cadastro/cliente';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-consulta',
@@ -23,6 +25,7 @@ import { Router } from '@angular/router';
     FormsModule,
     CommonModule,
   ],
+  providers: [provideNgxMask()],
   templateUrl: './consulta.component.html',
   styleUrl: './consulta.component.scss',
 })
@@ -53,7 +56,8 @@ export class ConsultaComponent {
   }
 
   preparaDeletar(cliente: Cliente) {
-cliente.deletando = true;  }
+    cliente.deletando = true;
+  }
 
   deletar(cliente: Cliente) {
     this.service.deletar(cliente);
