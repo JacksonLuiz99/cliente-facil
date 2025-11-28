@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ClienteService } from '../cliente.service';
 import { BrasilapiService } from '../brasilapi.service';
 import { Estado, Municipio } from '../models/brasilapi.models';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cadastro',
@@ -32,6 +33,8 @@ import { Estado, Municipio } from '../models/brasilapi.models';
     NgxMaskDirective,
     MatSelectModule,
     MatFormFieldModule,
+    MatSelectModule,
+    CommonModule
   ],
   providers: [provideNgxMask()],
 
@@ -74,7 +77,7 @@ export class CadastroComponent implements OnInit {
   carregarUFs() {
     //observable => subiscriber
     this.brasilapiService.listarUFs().subscribe({
-      next: (listaEstadors) => this.estados = listaEstadors,
+      next: (listaEstadors) => (this.estados = listaEstadors),
       error: (error) => console.log(error),
     });
   }
