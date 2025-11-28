@@ -29,6 +29,7 @@ import { Router } from '@angular/router';
 export class ConsultaComponent {
   nomeBusca: string = '';
   listaClientes: Cliente[] = [];
+  deletando: boolean = false;
   colunasTable: string[] = [
     'id',
     'nome',
@@ -49,6 +50,12 @@ export class ConsultaComponent {
   }
 
   preparaEditar(id: string) {
-    this.router.navigate(['/cadastro'], { queryParams: { 'id': id } });
+    this.router.navigate(['/cadastro'], { queryParams: { id: id } });
   }
+
+  preparaDeletar() {
+    this.deletando = true;
+  }
+
+  deletar(cliente: Cliente) {}
 }
