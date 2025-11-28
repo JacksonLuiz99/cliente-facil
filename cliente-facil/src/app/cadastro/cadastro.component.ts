@@ -12,10 +12,12 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Cliente } from './cliente';
-import { ClienteService } from '../cliente.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatSelectModule } from '@angular/material/select';
+import { ClienteService } from '../cliente.service';
+import { BrasilapiService } from '../brasilapi.service';
+import { Estado, Municipio } from '../models/brasilapi.models';
 
 @Component({
   selector: 'app-cadastro',
@@ -39,6 +41,8 @@ import { MatSelectModule } from '@angular/material/select';
 export class CadastroComponent implements OnInit {
   cliente: Cliente = Cliente.newCliente();
   atualizando: boolean = false;
+  estados: Estado[] = [];
+  municipios: Municipio[] = [];
   _snackBar = inject(MatSnackBar);
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
@@ -46,6 +50,7 @@ export class CadastroComponent implements OnInit {
 
   constructor(
     private service: ClienteService,
+    private brasilapiService: BrasilapiService,
     private route: ActivatedRoute,
     private router: Router,
   ) {}
@@ -61,6 +66,16 @@ export class CadastroComponent implements OnInit {
           this.cliente = clienteEncontrado;
         }
       }
+    });
+
+    this.carregarUFs();
+  }
+
+  carregarUFs() {
+    //observable => subiscriber
+    this.brasilapiService.listarUFs().subscribe({
+      next: (listaEstadors) => this.estados = listaEstadors,
+      error: (error) => console.log(error),
     });
   }
 
