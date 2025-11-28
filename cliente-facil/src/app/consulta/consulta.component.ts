@@ -59,6 +59,7 @@ export class ConsultaComponent {
 
   deletar(cliente: Cliente) {
     this.service.deletar(cliente);
+    this.listaClientes = this.service.pesquisarClientes('');
     this.deletando = false;
   }
 }
